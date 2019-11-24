@@ -1,8 +1,10 @@
 from . import db
+from . import login
 from werkzeug.security import check_password_hash
+from flask_login import UserMixin
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     '''User model'''
 
     __tablename__ = 'users'
@@ -12,3 +14,7 @@ class User(db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.password,password)
+
+@login.user_loader
+def load_user(id):
+   return User.query.get(int(id))
