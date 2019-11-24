@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{% import 'macros.html' as macro%}
 
 {%block title%}
 SIGNUP
@@ -6,33 +7,10 @@ SIGNUP
 
 {%block content%}
 <form action="{{url_for('main.signup')}}" , method="POST">
-    <div>
-        {{form.username(class_='form-control',placeholder='Username',autocomplete='off',autofocus=true)}}
-        <ul>
-            {% for error in form.username.errors %}
-            <li>{{error}}</li>
-            {% endfor %}
-        </ul>
 
-    </div>
-
-    <div>
-        {{form.password(class_='form-control',placeholder='Password')}}
-        <ul>
-            {% for error in form.password.errors %}
-            <li>{{error}}</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div>
-        {{form.confirm_pswd(class_='form-control',placeholder='Retype Password')}}
-        <ul>
-            {% for error in form.confirm_pswd.errors %}
-            <li>{{error}}</li>
-            {% endfor %}
-        </ul>
-    </div>
+    {{macro.displayField(form.username, 'Username', autocomplete='off', autofocus=true)}}
+    {{macro.displayField(form.password, 'Password')}}
+    {{macro.displayField(form.confirm_pswd, 'Retype Password')}}
 
     <div>
         {{form.submit_button}}
