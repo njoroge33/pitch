@@ -17,10 +17,11 @@ def signup():
 
     #updates the db if the validation was successful
     if reg_form.validate_on_submit():
+        email = reg_form.email.data
         username = reg_form.username.data
         password = generate_password_hash(reg_form.password.data)
         
-        user = User(username=username, password=password)
+        user = User(email=email, username=username, password=password)
         db.session.add(user)
         db.session.commit()
 
@@ -62,3 +63,22 @@ def logout():
     flash('you have logged out successfuly', 'success')
 
     return redirect(url_for('main.login'))
+
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+
+    return render_template('update.html',form =form)

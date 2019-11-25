@@ -8,9 +8,10 @@ SIGNUP
 {%block content%}
 <form action="{{url_for('main.signup')}}" , method="POST">
 
-    {{macro.displayField(form.username, 'Username', autocomplete='off', autofocus=true)}}
+    {{macro.displayField(form.email, 'Email...')}}
+    {{macro.displayField(form.username, 'Username...', autocomplete='off', autofocus=true)}}
     {{macro.displayField(form.password, 'Password')}}
-    {{macro.displayField(form.confirm_pswd, 'Retype Password')}}
+    {{macro.displayField(form.confirm_pswd, 'Confirm Password')}}
 
     <div>
         {{form.submit_button}}

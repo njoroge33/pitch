@@ -10,6 +10,7 @@
               <h3><a style="color:aliceblue;text-decoration: none;"href="/">PITCHER</a></h3>
           </div>
 
+          {% if not current_user.is_authenticated %}
           <div class="nav navbar-nav pull-right">
             <a class="btn btn-success" style="margin-top:24%;margin-left: 10%;" href="/login"">LOGIN</a>
         </div>
@@ -17,6 +18,11 @@
         <div class="nav navbar-nav pull-right">
           <a class="btn btn-danger" style="margin-top:20%;" href="/signup">SIGN UP</a>
       </div>
+      {%else%}
+      <div class="nav navbar-nav pull-right">
+          <a class="btn btn-success" style="margin-top:24%;margin-left: 10%;" href="{{url_for('main.logout')}}">LOGOUT</a>
+      </div>
+      {%endif%}
       </div>
   </div>
 </div>
