@@ -1,22 +1,22 @@
 {% extends 'bootstrap/base.html' %}
- 
+
 <body>
-{%block navbar%}
-{%include 'navbar.html'%}
-{%endblock%}
+  {%block navbar%}
+  {%include 'navbar.html'%}
+  {%endblock%}
 
-<!-- flashing messages -->
-{% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- flashing messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
-    <ul class=flashes>
+  <ul class=flashes>
     {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
+    <li class="{{ category }}">{{ message }}</li>
     {% endfor %}
-    </ul>
+  </ul>
   {% endif %}
-{% endwith %}
+  {% endwith %}
 
-{% block content%}
+  {% block content%}
 
-{%endblock%}
+  {%endblock%}
 </body>

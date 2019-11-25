@@ -2,9 +2,12 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-<div class="container">
-    {{wtf.quick_form(form)}}
-</div>
+
+<body class="container-fluid" style="background:#D6C7C7;">
+    <div class="container">
+        {{wtf.quick_form(form)}}
+    </div>
+</body>
 
 {{form.csrf_token}}
 {% endblock %}

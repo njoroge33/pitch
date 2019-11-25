@@ -1,34 +1,40 @@
 {% extends 'base.html'%}
 
 {% block content %}
-<div class="container">
-<div class="row">
-<!-- displaying  Username-->
-  <div class="col-md-4">
-    <h3> {{user.username| capitalize}} </h3>
 
-    <!--Displaying user bio-->
-    
-    {% if user.bio %}
+<body class="container-fluid" style="background:#D6C7C7;">
+  <div class="container">
+    <!-- displaying  Username-->
+    <div style="background:rgb(224, 227, 230);float:left;width: 25%;padding: 5%;border-radius: 5%;">
+
+      <!--Display profile photo-->
+
+      {% if user.profile_pic_path %}
+      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+      {%else%}
+      <h3>No profile picture</h3>
+      {% endif %}
+
+      <h3> {{user.username| capitalize}} </h3>
+
+      <!--Displaying user bio-->
+
+      {% if user.bio %}
       <p> {{user.bio}}</p>
-    {%else%}
+      {%else%}
       <p> {{user.username| capitalize}} has no bio </p>
-    {% endif %}
+      {% endif %}
+
+      {% if user == current_user %}
+      <a class="btn btn-success" href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+      {% endif %}
+    </div>
+    <div class="" style="background-color: rgb(167, 170, 170);padding-left: 30%;">
+      <h1 style="padding-left: 10%;padding-top: 10%;">vgufgvhuibvio gjjso</h1>
+      dygeyfdfyfyudgcdf
+      bdhsvhjfvfiohedc
+      hedvcgvuiefdvh
+    </div>
   </div>
-
-  <!--Display profile photo-->
-  <div class="col-md-4">
-
-    {% if user.profile_pic_path %}
-    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
-    {%else%}
-    <p>No profile picture</p>
-    {% endif %}
-  </div>
-
-  {% if user == current_user %}
-    <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
-{% endif %}
-</div>
-</div>
+</body>
 {% endblock %}
