@@ -1,4 +1,5 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
 
@@ -31,9 +32,11 @@
     </div>
     <div class="" style="background-color: rgb(167, 170, 170);padding-left: 30%;">
       <h1 style="padding-left: 10%;padding-top: 10%;">vgufgvhuibvio gjjso</h1>
-      dygeyfdfyfyudgcdf
-      bdhsvhjfvfiohedc
-      hedvcgvuiefdvh
+
+
+      {{wtf.quick_form(form)}}
+
+      {{form.csrf_token}}
     </div>
   </div>
 </body>

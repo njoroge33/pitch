@@ -50,12 +50,22 @@ def login():
 @main.route('/user/<uname>', methods=['GET', 'POST'])
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
+    form = PitchForm()
 
     if not current_user.is_authenticated:
         flash('please login', 'danger')
         return redirect(url_for('main.login'))
 
-    return render_template("profile.html", user = user)
+    if form.validate_on_submit():
+        title = form.title.data
+        category = form.category.data
+        description = form.description.data
+        
+        pitch = Pitch(owner_id=user.id, title=title, category=category, description=description)
+        db.session.add(pitch)
+        db.session.commit()
+
+    return render_template("profile.html", user=user, form=form)
 
 @main.route('/logout', methods=['GET'])
 def logout():
@@ -72,6 +82,7 @@ def update_profile(uname):
         abort(404)
 
     form = UpdateProfile()
+    
 
     if form.validate_on_submit():
         user.bio = form.bio.data

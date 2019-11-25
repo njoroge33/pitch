@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import InputRequired, Length, EqualTo, ValidationError, Email
 from ..models import User
 
@@ -35,4 +35,10 @@ class LoginForm(FlaskForm):
 
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [InputRequired(message="Bio is required")])
+    submit= SubmitField('Update')
+
+class PitchForm(FlaskForm):
+    title = StringField('title', validators=[InputRequired(message="Title required")])
+    category = SelectField('category', choices=[('product', 'product'), ('interview', 'interview'), ('promotion', 'promotion')], validators=[InputRequired(message="Category required")])
+    description = StringField('description', validators=[InputRequired(message="Description required")])
     submit= SubmitField('Update')
