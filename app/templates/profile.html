@@ -16,24 +16,33 @@
       <h3>No profile picture</h3>
       {% endif %}
 
-      <h3> {{user.username| capitalize}} </h3>
+      <div>
+        {% if user == current_user %}
+    <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
+
+      <input type="file"  name="photo" class="form-control " required>
+      <input type="submit" class="btn btn-success">
+    </form>
+      {% endif %}
+  </div>
+
+      <h4>Name: {{user.username| capitalize}} </h4>
 
       <!--Displaying user bio-->
 
       {% if user.bio %}
-      <p> {{user.bio}}</p>
+      <h4>Bio:</h4>
+      <em> {{user.bio}}</em>
       {%else%}
       <p> {{user.username| capitalize}} has no bio </p>
       {% endif %}
 
       {% if user == current_user %}
-      <a class="btn btn-success" href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+      <a class="btn btn-success" href="{{url_for('main.update_profile',uname=user.username)}}">Edit Bio</a>
       {% endif %}
     </div>
-    <div class="" style="background-color: rgb(167, 170, 170);padding-left: 30%;">
-      <h1 style="padding-left: 10%;padding-top: 10%;">vgufgvhuibvio gjjso</h1>
-
-
+    <div class="" style="padding-left: 30%;">
+      <h1 style="padding-left: 10%;">POST YOUR PITCH</h1>
       {{wtf.quick_form(form)}}
 
       {{form.csrf_token}}
