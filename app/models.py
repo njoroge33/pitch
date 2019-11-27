@@ -50,6 +50,15 @@ class Pitch(db.Model):
         pitches = Pitch.query.filter_by(owner_id=owner_id).all()
         return pitches
 
+class Comment(db.Model):
+    __tablename__='comments'
+    id = db.Column(db.Integer,primary_key=True)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+    description = db.Column(db.Text)
+    def __repr__(self):
+        return f"Comment : id: {self.id} comment: {self.description}"
+        
 @login.user_loader
 def load_user(id):
    return User.query.get(int(id))
