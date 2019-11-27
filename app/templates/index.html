@@ -7,7 +7,51 @@ HOME
 {%block content%}
 
 <body class="container-fluid" style="background:#D6C7C7;">
+    <div class="container">
+        <div>
+            <h1>Product Pitches</h1>
+            {% for item in pitches %}
+            {%if item.category == 'product'%}
 
+            <div class="panel" style ="background:rgb(87, 88, 90);color:white;">
+                <div class="panel-body">
+                    <div>{{ item.description | capitalize }}</div>
+                    <div><strong>Created: </strong>{{item.date | timeago }}</div>
+                </div>
+            </div>
+            {%endif%}
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Interview Pitches</h1>
+            {% for item in pitches %}
+            {%if item.category == 'interview'%}
+
+            <div class="panel" style ="background:rgb(87, 88, 90);color:white;">
+                <div class="panel-body">
+                    <div>{{ item.description | capitalize }}</div>
+                    <div><strong>Created: </strong>{{item.date | timeago }}</div>
+                </div>
+            </div>
+            {%endif%}
+            {% endfor %}
+        </div>
+
+        <div>
+            <h1>Promotion Pitches</h1>
+            {% for item in pitches %}
+            {%if item.category == 'promotion'%}
+            <div class="panel" style ="background:rgb(224, 227, 230);color:white;">
+                <div class="panel-body">
+                    <div>{{ item.description | capitalize }}</div>
+                    <div><strong>Created: </strong>{{item.date | timeago }}</div>
+                </div>
+            </div>
+            {%endif%}
+            {% endfor %}
+        </div>
+    </div>
 </body>
 
 {%endblock%}

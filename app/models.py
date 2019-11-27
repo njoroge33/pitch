@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash
 from flask_login import UserMixin
 import enum
 from sqlalchemy import Enum
+import arrow
 
 
 class User(UserMixin, db.Model):
@@ -36,6 +37,7 @@ class Pitch(db.Model):
     description = db.Column(db.String(), index = True)
     title = db.Column(db.String())
     category = db.Column(category_enum, server_default='product')
+    date = db.Column(db.DateTime, nullable=False, default=arrow.utcnow().datetime)
     upvotes = db.Column(db.Integer, default=0)
     downvotes = db.Column(db.Integer, default=0)
 

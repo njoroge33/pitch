@@ -1,5 +1,11 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block styles%}
+{{ super() }}
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
+{% endblock %}
+
 <body>
   {%block navbar%}
   {%include 'navbar.html'%}

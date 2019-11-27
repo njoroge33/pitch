@@ -5,10 +5,13 @@ from flask_login import login_user, current_user, login_required, logout_user
 from .forms import *
 from ..models import *
 from .. import db,photos
+import arrow
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+
+    pitches = Pitch.query.all()
+    return render_template('index.html', pitches=pitches)
 
 
 @main.route('/signup' , methods=['GET', 'POST'])
@@ -75,7 +78,7 @@ def logout():
     logout_user()
     flash('you have logged out successfuly', 'success')
 
-    return redirect(url_for('main.login'))
+    return redirect(url_for('main.index'))
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required

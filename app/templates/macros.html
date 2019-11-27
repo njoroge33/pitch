@@ -11,3 +11,15 @@
 
 </div>
 {%endmacro%}
+
+{%macro displayPitch(category)%}
+
+{% for item in pitches %}
+{%if item.category == 'interview'%}
+<div class="panel panel-default">
+    <div>{{ item.title }}</div>
+    <div>{{ item.description }}</div>
+</div>
+{%endif%}
+{% endfor %}
+{%endmacro%}

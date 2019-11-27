@@ -1,3 +1,4 @@
+import arrow
 from flask import Flask
 from config import config_options
 from flask_bootstrap import Bootstrap
@@ -27,5 +28,12 @@ def create_app(config_name):
 
     # from .request import configure_request
     # configure_request(app)
+
+    def format_date(value):
+        dt = arrow.get(value).to('UTC+3')
+        return arrow.get(dt).humanize()
+
+
+    app.jinja_env.filters['timeago'] = format_date
 
     return app
